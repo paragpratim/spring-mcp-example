@@ -24,7 +24,7 @@ public class DataProduct implements Serializable {
     @Id
     @JsonProperty("data_product_id")
     @Field(name = "data_product_id")
-    private long dataProductId;
+    private Long dataProductId;
 
     @JsonProperty("data_product_name")
     @Field(name = "data_product_name")
@@ -46,11 +46,11 @@ public class DataProduct implements Serializable {
     @Field(name = "data_product_version")
     private double dataProductVersion;
 
-    public long getDataProductId() {
+    public Long getDataProductId() {
         return dataProductId;
     }
 
-    public void setDataProductId(long dataProductId) {
+    public void setDataProductId(Long dataProductId) {
         this.dataProductId = dataProductId;
     }
 
