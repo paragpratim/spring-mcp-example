@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  # Spring MCP Application Server
+  backend:
+    build: ./spring-mcp-app
+    container_name: spring-mcp-app-server
+    networks:
+      - spring-mcp-server-net
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev
+      - PORT=8080
+    labels:
+      - "app=spring-mcp-app-server"
+      - "tier=backend"
+      - "role=mcp-server"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+networks:
+  spring-mcp-server-net:
+    driver: bridge

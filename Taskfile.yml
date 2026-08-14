@@ -1,0 +1,31 @@
+version: '3'
+
+tasks:
+  all:
+    desc: Build application, build docker images, and run docker compose
+    cmds:
+      - task: build-backend
+      - task: docker-build
+      - task: docker-up
+      - task: clean
+
+  build-backend:
+    desc: Maven clean install for backend
+    cmds:
+      - cd spring-mcp-app && ./mvnw clean install
+
+  docker-build:
+    desc: Build Docker images
+    cmds:
+      - docker-compose build
+
+  docker-up:
+    desc: Run Docker Compose
+    cmds:
+      - docker-compose up
+
+  clean:
+    desc: Clean backend and stop containers
+    cmds:
+      - cd spring-mcp-app && mvn clean
+      - docker-compose down -v
