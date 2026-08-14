@@ -5,6 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+        <!-- Spring Version -->
         <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
@@ -15,13 +16,30 @@
     <description>spring-mcp-app</description>
     <properties>
         <java.version>17</java.version>
+        <!-- Spring AI Version -->
         <spring-ai.version>2.0.0</spring-ai.version>
+        <!-- Spring Cloud Version -->
+        <spring-cloud.version>2025.1.2</spring-cloud.version>
+        <!-- Spring Cloud GCP Version -->
+        <spring-cloud-gcp.version>8.1.0</spring-cloud-gcp.version>
     </properties>
     <dependencies>
         <!-- Spring MCP Server Starter -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Starter Web for building web applications, including RESTful APIs -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud GCP Starter Data Datastore for Google Cloud Datastore integration -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>spring-cloud-gcp-starter-data-datastore</artifactId>
         </dependency>
 
         <!-- Spring API Documentation (OpenAPI) -->
@@ -46,10 +64,27 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!-- Spring AI BOM (Bill of Materials) for managing Spring AI dependencies -->
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
                 <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud BOM for managing Spring Cloud dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud GCP BOM for managing Spring Cloud GCP dependencies -->
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>${spring-cloud-gcp.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

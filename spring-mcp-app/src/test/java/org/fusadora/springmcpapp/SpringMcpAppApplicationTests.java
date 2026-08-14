@@ -1,4 +1,4 @@
-package org.fusadora.springmcptoolapp;
+package org.fusadora.springmcpapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
