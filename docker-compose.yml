@@ -6,6 +6,8 @@ services:
     container_name: spring-mcp-app-server
     networks:
       - spring-mcp-server-net
+    ports:
+      - "8080:8080"
     environment:
       - SERVER_PORT=8080
       - SPRING_PROFILES_ACTIVE=dev
