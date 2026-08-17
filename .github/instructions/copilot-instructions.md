@@ -4,5 +4,7 @@ This Project has been created to demonstrate how to use Spring AI to create a si
 # Project Structure
 The project is structured as follows:
 - `spring-mcp-app`: Contains the main Java source code for the MCP tool and server.
-- TODO : More to follow
+- `docker-compose.yml`: Contains the Docker Compose configuration to run the MCP server and inspector together.
+- `Taskfile.yml`: Contains the tasks to build and run the project using Task.
+- `README.md`: Contains the project description and instructions to run the project.
 
