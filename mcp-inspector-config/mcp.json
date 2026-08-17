@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "spring-mcp": {
+      "type": "streamable-http",
+      "url": "http://host.docker.internal:8080/mcp"
+    }
+  }
+}
