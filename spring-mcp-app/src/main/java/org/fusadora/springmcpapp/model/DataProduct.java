@@ -1,8 +1,11 @@
 package org.fusadora.springmcpapp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.spring.data.datastore.core.mapping.Entity;
 import com.google.cloud.spring.data.datastore.core.mapping.Field;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 
 import java.io.Serial;
@@ -18,9 +21,11 @@ import java.io.Serializable;
 @Entity(name = "data_product")
 public class DataProduct implements Serializable {
 
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataProduct.class);
+
     @Serial
     private static final long serialVersionUID = 1L;
-
     @Id
     @JsonProperty("data_product_id")
     @Field(name = "data_product_id")
@@ -92,5 +97,15 @@ public class DataProduct implements Serializable {
 
     public void setDataProductVersion(double dataProductVersion) {
         this.dataProductVersion = dataProductVersion;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return MAPPER.writeValueAsString(this);
+        } catch (Exception e) {
+            LOGGER.warn("Error converting DataProduct to JSON: {}", e.getMessage(), e);
+            return String.format("Error converting DataProduct to JSON: %s", e.getMessage());
+        }
     }
 }

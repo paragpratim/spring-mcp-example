@@ -32,6 +32,23 @@ services:
       retries: 5
       start_period: 60s
 
+  # MCP Inspector UI
+  mcp-inspector:
+    image: node:20-alpine
+    container_name: mcp-inspector
+    working_dir: /workspace
+    command: sh -lc "npx @modelcontextprotocol/inspector@latest"
+    environment:
+      - MCP_SERVER_URL=${MCP_SERVER_URL:-http://host.docker.internal:8080/mcp}
+    ports:
+      - "6274:6274"
+      - "6275:6275"
+    networks:
+      - spring-mcp-server-net
+    depends_on:
+      - backend
+    restart: unless-stopped
+
 networks:
   spring-mcp-server-net:
     driver: bridge

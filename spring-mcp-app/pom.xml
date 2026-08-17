@@ -27,7 +27,7 @@
         <!-- Spring MCP Server Starter -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-mcp-server</artifactId>
+            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
         </dependency>
 
         <!-- Spring Boot Starter Web for building web applications, including RESTful APIs -->
