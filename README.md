@@ -15,6 +15,50 @@ Start the backend and inspector together:
 task all
 ```
 
+## Key project files
+
+### Maven dependencies for the Spring MCP app
+
+The required Spring AI and MCP dependencies are declared in:
+
+- [spring-mcp-app/pom.xml](spring-mcp-app/pom.xml)
+
+Relevant section:
+
+```xml
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+</dependency>
+```
+
+This is the dependency that enables the Spring MCP server support used by the application.
+
+### Example MCP tool implementation
+
+The sample tool is defined here:
+
+- [spring-mcp-app/src/main/java/org/fusadora/springmcpapp/mcp/tool/DataProductTool.java](spring-mcp-app/src/main/java/org/fusadora/springmcpapp/mcp/tool/DataProductTool.java)
+
+Example implementation:
+
+```java
+@Service
+public class DataProductTool {
+    @Autowired
+    private DataProductService dataProductService;
+
+    @McpTool(description = "Get information about a data product by its ID")
+    public String getDataProductInfo(
+            @McpToolParam(description = "The ID of the data product") String dataProductId
+    ) {
+        return String.format("Data Product Info: %s", dataProductService.getDataProduct(dataProductId));
+    }
+}
+```
+
+This is the core of the MCP server: the method is exposed as an MCP tool and can be discovered and invoked by an MCP client such as the inspector.
+
 ## Local access
 
 Open the Swagger UI here to explore the REST API:
