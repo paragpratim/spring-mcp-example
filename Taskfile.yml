@@ -14,6 +14,22 @@ tasks:
     cmds:
       - cd spring-mcp-app && ./mvnw clean install
 
+  prepare-mcp-inspector-config:
+    desc: Ensure the MCP Inspector config exists in the volume mount path
+    cmds:
+      - |
+        mkdir -p mcp-inspector-config
+        cat <<'EOF' > mcp-inspector-config/mcp.json
+        {
+          "mcpServers": {
+            "spring-mcp": {
+              "type": "streamable-http",
+              "url": "http://host.docker.internal:8080/mcp"
+            }
+          }
+        }
+        EOF
+
   docker-build:
     desc: Build Docker images
     cmds:
@@ -22,6 +38,7 @@ tasks:
   docker-up:
     desc: Run Docker Compose
     cmds:
+      - task: prepare-mcp-inspector-config
       - docker-compose up
 
   clean:
